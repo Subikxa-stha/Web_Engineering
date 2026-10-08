@@ -1,0 +1,17 @@
+{
+  "name": "online book store",
+  "version": "1.0.0",
+  "description": "An online book store application",
+  "license": "ISC",
+  "author": "Sahil Adhikari",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
