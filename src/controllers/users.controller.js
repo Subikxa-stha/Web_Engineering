@@ -1,12 +1,10 @@
-import { UsersRepository } from '../repositories/users.repository.js';
-import { UsersService } from '../services/user.services.js';
 import { pageLinks } from '../utils/query.js';
 
-// The controller creates its own service (and the service's repository) — no container.
-// Methods are ARROW FUNCTIONS so `this` still works when Express calls them as plain callbacks.
+// Dependency Injection: the controller RECEIVES its service instead of creating it.
+// It no longer imports UsersService or UsersRepository at all.
 export class UsersController {
-  constructor() {
-    this.usersService = new UsersService(new UsersRepository());
+  constructor(usersService) {
+    this.usersService = usersService;
   }
 
   list = async (req, res) => {
@@ -23,7 +21,7 @@ export class UsersController {
     res.status(201).location(`${req.baseUrl}/${user.id}`).json({ data: user });
   };
 
-  update = async (req, res) => {
+    update = async (req, res) => {
     res.json({ data: await this.usersService.update(req.params.id, req.body) });
   };
 
